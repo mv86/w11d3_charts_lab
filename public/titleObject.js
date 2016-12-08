@@ -1,5 +1,5 @@
 var TitleObject = function(text){
-var title = {title: text};
+var title = {text: text};
 return title;
 }
 

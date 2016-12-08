@@ -1,3 +1,5 @@
+var region = 'Europe';
+
 window.onload = function(){
 
   var url = 'https://restcountries.eu/rest/v1/all';
@@ -15,6 +17,13 @@ var requestComplete = function(){
   if (this.status !== 200) return;
   var jsonString = this.responseText;
   var countries = JSON.parse(jsonString);
+  
+  var selectBox = document.querySelector('select');
+    selectBox.onchange = function(){
+    region = this.value;
+    populateData(countries);
+  };
+
   populateData(countries);
 }
 
@@ -23,7 +32,7 @@ var requestComplete = function(){
 var populateData = function(countries){
   var europeanCountries = [];
   countries.forEach(function(country){
-    if (country.region === "Europe"){
+    if (country.region === region){
       europeanCountries.push(country);
     }
   })
@@ -44,10 +53,16 @@ var buildDataArray = function(countries){
 
 var createChart = function(countries){
   var chart = new ChartObject('pie', 'pie-chart');
-  var title = new TitleObject("Pokemon Types I've Caught");
+  var title = new TitleObject("Country population");
 
-  var series = new SeriesObject("Pokemon Type", countries);
+  var series = new SeriesObject("Country", countries);
   new PieChart(chart, title, series);
+}
+
+
+var handleSelectChanged = function(){
+  var pTag = document.querySelector('#regions');
+  region = this.value; 
 }
 
 
