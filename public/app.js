@@ -1,4 +1,5 @@
 var region;
+var chartType;
 
 window.onload = function(){
 
@@ -17,9 +18,14 @@ var requestComplete = function(){
   if (this.status !== 200) return;
   var jsonString = this.responseText;
   var countries = JSON.parse(jsonString);
+
+  var chartTypeSelectBox = document.getElementById('chart-select');
+    chartTypeSelectBox.onchange = function() {
+      chartType = this.value;
+    }
   
-  var selectBox = document.querySelector('select');
-    selectBox.onchange = function(){
+  var regionSelectBox = document.getElementById('region-select');
+    regionSelectBox.onchange = function(){
     region = this.value;
     populateData(countries);
   };
