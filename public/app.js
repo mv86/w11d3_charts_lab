@@ -56,48 +56,32 @@ var buildDataArray = function(countries){
 }
 
 var createChart = function(countries){
-  var chart = new ChartObject('pie', 'pie-chart');
+  if (chartType === 'pie-chart') {
+    var pieChart = createPieChart(countries);
+    return pieChart;
+  };
+  if (chartType === 'column-chart') {
+    var columnChart = createColumnChart(countries);
+    return columnChart;
+  }
+}
+
+var createPieChart = function(countries) {
   var title = new TitleObject("Countries by Population");
-
-  var series = new SeriesObject("Country", countries);
-  new PieChart(chart, title, series);
+  var pieChartSeries = new SeriesObject("Population", countries);
+  var pieChart = new ChartObject('pie', 'pie-chart');
+  new PieChart(pieChart, title, pieChartSeries);
 }
 
-var handleSelectChanged = function(){
-  var pTag = document.querySelector('#regions');
-  region = this.value; 
+var createColumnChart = function(countries) {
+  var countryNames = [];
+  for (var country of countries) {
+    countryNames.push(country.name);
+  }
+  var yAxis = new YAxis("Population Numbers")
+  var xAxis = new XAxis(countryNames);
+  var title = new TitleObject("Countries by Population");
+  var columnChartSeries = new SeriesObject("Countries", countries);
+  var columnChart = new ChartObject('column', 'column-chart') ;
+  new ColumnChart(columnChart, title, columnChartSeries, xAxis, yAxis);
 }
-
-
-  // var chart = new ChartObject('column', 'column-chart');
-
-  // var title = {text: "Our favourite programming languages"};
-  // var series = [{
-  //   name: "Cohort 7",
-  //   data: [{y:8, color: '#f7df1e'},12,3,1],
-  // }];
-  // var xaxis = {categories: ['Javascript', 'Java', 'Ruby', 'C++']};
-  // new ColumnChart(chart, title, series, xaxis);
-// }
-
-// chart: {
-//   type: 'column',
-//   renderTo: container
-// },
-
-// title: {
-//   text:"Our favourite programming languages"
-// },
-// series: [{
-//   name: "Cohort 7",
-//   data: [{y:8, color: '#f7df1e'},12,3,1],
-
-// }],
-// xAxis: {
-//   categories: ['Javascript', 'Java', 'Ruby', 'C++']
-// }
-
-// var chartObject = {function(chartType, chart){
-//   type: chartType,
-//   renderTo: document.getElementById(chart);}
-// }

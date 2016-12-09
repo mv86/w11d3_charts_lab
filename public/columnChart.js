@@ -1,9 +1,10 @@
-var ColumnChart = function(chart, title, series, xaxis){
+var ColumnChart = function(chart, title, series, xaxis, yaxis){
   var chart = new Highcharts.Chart({
     chart: chart,
     title: title,
     series: series,
-    xAxis: xaxis
+    xAxis: xaxis,
+    yAxis: yaxis
   })
 
 }
