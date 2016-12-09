@@ -4,9 +4,5 @@ var PieChart = function(chart, title, series){
     chart: chart,
     title: title,
     series: series
-
-
-
-
   });
 }

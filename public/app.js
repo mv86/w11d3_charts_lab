@@ -1,4 +1,4 @@
-var region = 'Europe';
+var region;
 
 window.onload = function(){
 
@@ -27,8 +27,6 @@ var requestComplete = function(){
   populateData(countries);
 }
 
-
-
 var populateData = function(countries){
   var europeanCountries = [];
   countries.forEach(function(country){
@@ -53,12 +51,11 @@ var buildDataArray = function(countries){
 
 var createChart = function(countries){
   var chart = new ChartObject('pie', 'pie-chart');
-  var title = new TitleObject("Country population");
+  var title = new TitleObject("Countries by Population");
 
   var series = new SeriesObject("Country", countries);
   new PieChart(chart, title, series);
 }
-
 
 var handleSelectChanged = function(){
   var pTag = document.querySelector('#regions');
