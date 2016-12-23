@@ -22,6 +22,7 @@ var requestComplete = function(){
   var chartTypeSelectBox = document.getElementById('chart-select');
     chartTypeSelectBox.onchange = function() {
       chartType = this.value;
+      populateData(countries);
     }
   
   var regionSelectBox = document.getElementById('region-select');
@@ -29,8 +30,6 @@ var requestComplete = function(){
     region = this.value;
     populateData(countries);
   };
-
-  populateData(countries);
 }
 
 var populateData = function(countries){
@@ -56,11 +55,11 @@ var buildDataArray = function(countries){
 }
 
 var createChart = function(countries){
-  if (chartType === 'pie-chart') {
+  if (chartType === 'Pie Chart') {
     var pieChart = createPieChart(countries);
     return pieChart;
   };
-  if (chartType === 'column-chart') {
+  if (chartType === 'Column Chart') {
     var columnChart = createColumnChart(countries);
     return columnChart;
   }
@@ -69,7 +68,7 @@ var createChart = function(countries){
 var createPieChart = function(countries) {
   var title = new TitleObject("Countries by Population");
   var pieChartSeries = new SeriesObject("Population", countries);
-  var pieChart = new ChartObject('pie', 'pie-chart');
+  var pieChart = new ChartObject('pie', 'chart');
   new PieChart(pieChart, title, pieChartSeries);
 }
 
@@ -82,6 +81,6 @@ var createColumnChart = function(countries) {
   var xAxis = new XAxis(countryNames);
   var title = new TitleObject("Countries by Population");
   var columnChartSeries = new SeriesObject("Countries", countries);
-  var columnChart = new ChartObject('column', 'column-chart') ;
+  var columnChart = new ChartObject('column', 'chart') ;
   new ColumnChart(columnChart, title, columnChartSeries, xAxis, yAxis);
 }
